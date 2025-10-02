@@ -68,9 +68,13 @@ UserSchema.virtual('fullName').get(function() {
   return `${this.firstName} ${this.lastName}`;
 });
 
-// Ensure virtual fields are serialized
+// Ensure virtual fields are serialized and exclude sensitive fields
 UserSchema.set('toJSON', {
-  virtuals: true
+  virtuals: true,
+  transform: function(doc, ret) {
+    delete ret.googleId;
+    return ret;
+  }
 });
 
 export const User = mongoose.model<IUser>('User', UserSchema);
