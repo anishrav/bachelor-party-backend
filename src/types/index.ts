@@ -3,7 +3,7 @@ declare global {
   namespace Express {
     interface Request {
       id?: string;
-      user?: any; // Will be defined when authentication is implemented
+      user?: User | undefined; // Will be defined when authentication is implemented
     }
   }
 }
